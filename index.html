@@ -89,9 +89,24 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 const audio=document.getElementById('bgMusic'), musicBtn=document.getElementById('musicBtn');
-musicBtn.addEventListener('click',async()=>{
- if(audio.paused){try{await audio.play();musicBtn.textContent='Ⅱ';musicBtn.title='Pause music'}catch(e){alert('Add your licensed aaj-sajeya.mp3 audio file to the project folder to enable music.')}}else{audio.pause();musicBtn.textContent='♫';musicBtn.title='Play music'}
+
+musicBtn.addEventListener('click', async () => {
+  if (audio.paused) {
+    try {
+      audio.currentTime = 0;
+      await audio.play();
+      musicBtn.textContent = 'Ⅱ';
+      musicBtn.title = 'Pause music';
+    } catch (error) {
+      alert('Unable to play music. Please try again.');
+    }
+  } else {
+    audio.pause();
+    musicBtn.textContent = '♫';
+    musicBtn.title = 'Play music';
+  }
 });
+
 document.getElementById('shareBtn').addEventListener('click',async()=>{
  const data={title:'Apoorv & Shubhi — Engagement Invitation',text:'You are warmly invited to celebrate the engagement of Apoorv Vishal & Shubhi Saxena on 22 November 2026 at 6:30 PM onwards, Hotel Sita Kiran, Bareilly.',url:location.href};
  if(navigator.share){try{await navigator.share(data)}catch(e){}}
